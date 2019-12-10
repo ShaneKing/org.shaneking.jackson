@@ -83,6 +83,16 @@ public class OM3Test extends SKUnit {
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue("{\"t\":\"s1\"}", OM3.om().getTypeFactory().constructParametricType(PrepareOM3T.class, String.class))));
   }
 
+  @Test(expected = Exception.class)
+  public void readValueA22JavaTypeException() {
+    skPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), false)));
+  }
+
+  @Test
+  public void readValueA22JavaTypeNull() {
+    Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), true)));
+  }
+
   @Test
   public void readValueA22() {
     Assert.assertEquals("{\"s1\":\"s1\"}", OM3.writeValueAsString(OM3.readValue("{\"s1\":\"s1\"}", new TypeReference<PrepareOM3>() {
