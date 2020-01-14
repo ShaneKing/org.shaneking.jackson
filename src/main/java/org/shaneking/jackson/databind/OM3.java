@@ -39,7 +39,11 @@ public class OM3 {
   }
 
   public static <T> T readValue(String content, JavaType javaType) {
-    return readValue(om(), content, javaType);
+    return readValue(content, javaType, false);
+  }
+
+  public static <T> T readValue(String content, JavaType javaType, boolean rtnNullIfException) {
+    return readValue(om(), content, javaType, rtnNullIfException);
   }
 
   public static <T> T readValue(@NonNull ObjectMapper objectMapper, String content, JavaType javaType) {
@@ -60,7 +64,11 @@ public class OM3 {
   }
 
   public static <T> T readValue(String content, Class<T> valueType) {
-    return readValue(om(), content, valueType);
+    return readValue(content, valueType, false);
+  }
+
+  public static <T> T readValue(String content, Class<T> valueType, boolean rtnNullIfException) {
+    return readValue(om(), content, valueType, rtnNullIfException);
   }
 
   public static <T> T readValue(@NonNull ObjectMapper objectMapper, String content, Class<T> valueType) {
@@ -81,7 +89,11 @@ public class OM3 {
   }
 
   public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
-    return readValue(om(), content, valueTypeRef);
+    return readValue(content, valueTypeRef, false);
+  }
+
+  public static <T> T readValue(String content, TypeReference<T> valueTypeRef, boolean rtnNullIfException) {
+    return readValue(om(), content, valueTypeRef, rtnNullIfException);
   }
 
   public static <T> T readValue(@NonNull ObjectMapper objectMapper, String content, TypeReference<T> valueTypeRef) {
