@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString
 public class PrepareOM3T<T> {
-
   @Getter
   @Setter
   private T s1;

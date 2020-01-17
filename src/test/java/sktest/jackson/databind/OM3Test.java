@@ -14,7 +14,6 @@ import sktest.jackson.databind.prepare.PrepareOM3T;
 import java.util.ArrayList;
 
 public class OM3Test extends SKUnit {
-
   @Test
   public void readValueA1List() {
     Assert.assertEquals("[]", OM3.writeValueAsString(new ArrayList<>()));
@@ -167,7 +166,6 @@ public class OM3Test extends SKUnit {
   public void valueToTreeA1() {
     PrepareOM3 prepare = new PrepareOM3();
     Assert.assertEquals("{}", OM3.writeValueAsString(OM3.valueToTree(prepare)));
-
   }
 
   @Test(expected = NullPointerException.class)
