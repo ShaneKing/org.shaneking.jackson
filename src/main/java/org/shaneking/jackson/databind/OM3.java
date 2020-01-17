@@ -8,9 +8,13 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.shaneking.skava.lang.SkavaException;
+
+import java.util.Map;
 
 @Slf4j
 public class OM3 {
@@ -32,6 +36,21 @@ public class OM3 {
 
   public static ObjectNode createObjectNode(@NonNull ObjectMapper objectMapper) {
     return objectMapper.createObjectNode();
+  }
+
+  //last result, parameters
+  public static String lp(Object object, Object... objects) {
+    Map<String, Object> rtnMap = Maps.newHashMap();
+    rtnMap.put("l", object);
+    rtnMap.put("p", Lists.newArrayList(objects));
+    return writeValueAsString(rtnMap);
+  }
+
+  //parameters
+  public static String p(Object... objects) {
+    Map<String, Object> rtnMap = Maps.newHashMap();
+    rtnMap.put("p", Lists.newArrayList(objects));
+    return writeValueAsString(rtnMap);
   }
 
   public static <T> T readValue(T t) {

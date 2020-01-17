@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.shaneking.jackson.databind.OM3;
 import org.shaneking.skava.lang.SkavaException;
+import org.shaneking.skava.persistence.Tuple;
 import sktest.jackson.SKUnit;
 import sktest.jackson.databind.prepare.PrepareOM3;
 import sktest.jackson.databind.prepare.PrepareOM3NoGetterSetter;
@@ -37,6 +38,16 @@ public class OM3Test extends SKUnit {
   @Test(expected = NullPointerException.class)
   public void createObjectNodeA1() {
     Assert.assertEquals("{}", OM3.writeValueAsString(OM3.createObjectNode(null)));
+  }
+
+  @Test
+  public void lp() {
+    Assert.assertEquals("{\"p\":[\"a\",1,[127,0,0,1]],\"l\":3}", OM3.lp(3, "a", 1, Tuple.of(127, 0, 0, 1)));
+  }
+
+  @Test
+  public void p() {
+    Assert.assertEquals("{\"p\":[3,\"a\",1,[127,0,0,1]]}", OM3.p(3, "a", 1, Tuple.of(127, 0, 0, 1)));
   }
 
   @Test
@@ -87,6 +98,11 @@ public class OM3Test extends SKUnit {
     skPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), false)));
   }
 
+  @Test(expected = Exception.class)
+  public void readValueA22NullJavaTypeException() {
+    skPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class))));
+  }
+
   @Test
   public void readValueA22JavaTypeNull() {
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), true)));
@@ -113,6 +129,11 @@ public class OM3Test extends SKUnit {
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "{\"s1\":\"s1\"}", PrepareOM3NoGetterSetter.class, false)));
   }
 
+  @Test(expected = SkavaException.class)
+  public void readValueA4Empty() {
+    Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "{\"s1\":\"s1\"}", PrepareOM3NoGetterSetter.class)));
+  }
+
   @Test
   public void readValueA4True() {
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "{\"s1\":\"s1\"}", PrepareOM3NoGetterSetter.class, true)));
@@ -122,6 +143,12 @@ public class OM3Test extends SKUnit {
   public void readValueA4TypeRefFalse() {
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "{\"s1\":\"s1\"}", new TypeReference<PrepareOM3NoGetterSetter>() {
     }, false)));
+  }
+
+  @Test(expected = SkavaException.class)
+  public void readValueA4NullTypeRefTrue() {
+    Assert.assertEquals("null", OM3.writeValueAsString(OM3.readValue(OM3.om(), "{\"s1\":\"s1\"}", new TypeReference<PrepareOM3NoGetterSetter>() {
+    })));
   }
 
   @Test
