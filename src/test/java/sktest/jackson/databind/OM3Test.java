@@ -52,6 +52,11 @@ public class OM3Test extends SKUnit {
   }
 
   @Test
+  public void pNull() {
+    Assert.assertEquals("{\"p\":[null,null,null]}", OM3.p(null, null, null));
+  }
+
+  @Test
   public void readValueA1PrepareOM3() {
     PrepareOM3 prepare = new PrepareOM3().setS1("s1");
     Assert.assertEquals("{\"s1\":\"s1\"}", OM3.writeValueAsString(prepare));
