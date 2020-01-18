@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.shaneking.jackson.databind.OM3;
 import org.shaneking.skava.lang.SkavaException;
+import org.shaneking.skava.lang.String0;
 import org.shaneking.skava.persistence.Tuple;
 import sktest.jackson.SKUnit;
 import sktest.jackson.databind.prepare.PrepareOM3;
@@ -27,7 +28,7 @@ public class OM3Test extends SKUnit {
 
   @Test(expected = SkavaException.class)
   public void om() {
-    Assert.assertEquals("", OM3.writeValueAsString(OM3.om()));
+    Assert.assertEquals(String0.EMPTY, OM3.writeValueAsString(OM3.om()));
   }
 
   @Test
