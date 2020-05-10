@@ -8,7 +8,7 @@ import org.shaneking.jackson.databind.OM3;
 import org.shaneking.skava.lang.SkavaException;
 import org.shaneking.skava.lang.String0;
 import org.shaneking.skava.persistence.Tuple;
-import sktest.jackson.SKUnit;
+import org.shaneking.test.SKUnit;
 import sktest.jackson.databind.prepare.PrepareOM3;
 import sktest.jackson.databind.prepare.PrepareOM3NoGetterSetter;
 import sktest.jackson.databind.prepare.PrepareOM3T;
