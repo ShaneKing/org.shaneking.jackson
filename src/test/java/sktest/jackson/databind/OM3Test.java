@@ -101,12 +101,12 @@ public class OM3Test extends SKUnit {
 
   @Test(expected = Exception.class)
   public void readValueA22JavaTypeException() {
-    skPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), false)));
+    tstPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class), false)));
   }
 
   @Test(expected = Exception.class)
   public void readValueA22NullJavaTypeException() {
-    skPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class))));
+    tstPrint(OM3.writeValueAsString(OM3.readValue(OM3.om(), "a:b", OM3.om().getTypeFactory().constructType(PrepareOM3.class))));
   }
 
   @Test
