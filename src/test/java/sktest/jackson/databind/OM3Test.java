@@ -1,13 +1,18 @@
 package sktest.jackson.databind;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 import org.shaneking.jackson.databind.OM3;
 import org.shaneking.skava.lang.SkavaException;
 import org.shaneking.skava.lang.String0;
 import org.shaneking.skava.persistence.Tuple;
+import org.shaneking.skava.util.Map0;
 import org.shaneking.test.SKUnit;
 import sktest.jackson.databind.prepare.PrepareOM3;
 import sktest.jackson.databind.prepare.PrepareOM3NoGetterSetter;
@@ -217,5 +222,19 @@ public class OM3Test extends SKUnit {
   public void writeValueAsStringA3() {
     PrepareOM3NoGetterSetter prepare = new PrepareOM3NoGetterSetter();
     Assert.assertEquals("null", OM3.writeValueAsString(OM3.writeValueAsString(OM3.om(), prepare, true)));
+  }
+
+  @Test
+  public void writeValueAsStringNull() throws JsonProcessingException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+    Assert.assertEquals("{}", objectMapper.writeValueAsString(Map0.newHashMap(Lists.newArrayList("a", "b"), Lists.newArrayList("", null))));
+  }
+
+  @Test
+  public void writeValueAsStringEmpty() throws JsonProcessingException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    Assert.assertEquals("{\"a\":\"\"}", objectMapper.writeValueAsString(Map0.newHashMap(Lists.newArrayList("a", "b"), Lists.newArrayList("", null))));
   }
 }

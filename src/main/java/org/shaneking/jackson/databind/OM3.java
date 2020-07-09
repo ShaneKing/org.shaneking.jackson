@@ -25,8 +25,13 @@ public class OM3 {
     if (OM == null) {
       OM = new ObjectMapper();
       OM.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-      OM.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+      OM.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
+    return OM;
+  }
+
+  public static ObjectMapper om(ObjectMapper objectMapper) {
+    OM = objectMapper;
     return OM;
   }
 
