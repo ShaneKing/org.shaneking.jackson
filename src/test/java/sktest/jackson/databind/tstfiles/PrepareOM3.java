@@ -1,4 +1,4 @@
-package sktest.jackson.databind.prepare;
+package sktest.jackson.databind.tstfiles;
 
 import lombok.Getter;
 import lombok.Setter;

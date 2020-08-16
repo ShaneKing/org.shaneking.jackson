@@ -14,9 +14,9 @@ import org.shaneking.skava.lang.String0;
 import org.shaneking.skava.persistence.Tuple;
 import org.shaneking.skava.util.Map0;
 import org.shaneking.test.SKUnit;
-import sktest.jackson.databind.prepare.PrepareOM3;
-import sktest.jackson.databind.prepare.PrepareOM3NoGetterSetter;
-import sktest.jackson.databind.prepare.PrepareOM3T;
+import sktest.jackson.databind.tstfiles.PrepareOM3;
+import sktest.jackson.databind.tstfiles.PrepareOM3NoGetterSetter;
+import sktest.jackson.databind.tstfiles.PrepareOM3T;
 
 import java.util.ArrayList;
 
@@ -81,8 +81,8 @@ public class OM3Test extends SKUnit {
   public void readValueA1PrepareOM3NoGetterSetter() {
     PrepareOM3NoGetterSetter prepare = new PrepareOM3NoGetterSetter();
     Assert.assertEquals("{}", OM3.writeValueAsString(prepare));
-//    Assert.assertEquals("{}", OM3.writeValueAsString(OM3.readValue(prepare)));
-//    Assert.assertSame(prepare, OM3.readValue(prepare));
+//    Assert.assertEquals("{}", OM3.writeValueAsString(OM3.readValue(tstfiles)));
+//    Assert.assertSame(tstfiles, OM3.readValue(tstfiles));
   }
 
   @Test

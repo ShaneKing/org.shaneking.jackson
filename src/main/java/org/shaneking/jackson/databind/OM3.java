@@ -8,10 +8,13 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.shaneking.jackson.filter.CtxIgnoredFilter;
 import org.shaneking.skava.lang.SkavaException;
 
 import java.util.Map;
@@ -30,9 +33,27 @@ public class OM3 {
     return OM;
   }
 
-  public static ObjectMapper om(ObjectMapper objectMapper) {
+  public static ObjectMapper omWithCtx() {
+    return appendCtxIgnoredFilter(om());
+  }
+
+  public static ObjectMapper om(@NonNull ObjectMapper objectMapper) {
     OM = objectMapper;
     return OM;
+  }
+
+  public static ObjectMapper omWithCtx(@NonNull ObjectMapper objectMapper) {
+    return appendCtxIgnoredFilter(om(objectMapper));
+  }
+
+  public static ObjectMapper appendCtxIgnoredFilter(@NonNull ObjectMapper objectMapper) {
+    FilterProvider filterProvider = objectMapper.getSerializationConfig().getFilterProvider();
+    if (filterProvider == null) {
+      objectMapper.setFilterProvider(new SimpleFilterProvider().addFilter(CtxIgnoredFilter.FILTER_NAME, new CtxIgnoredFilter()));
+    } else if (filterProvider instanceof SimpleFilterProvider) {
+      ((SimpleFilterProvider) filterProvider).addFilter(CtxIgnoredFilter.FILTER_NAME, new CtxIgnoredFilter());
+    }
+    return objectMapper;
   }
 
   public static ObjectNode createObjectNode() {
